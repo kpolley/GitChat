@@ -20,7 +20,7 @@ the organization's private repository.
 
 ## Features
 
-The UI elements were derived from [Vercel's Next.js AI Chatbot Template](https://vercel.com/templates/next.js/nextjs-ai-chatbot)
+The UI was built using [Vercel's Next.js AI Chatbot Template](https://vercel.com/templates/next.js/nextjs-ai-chatbot)
 
 It includes
 
