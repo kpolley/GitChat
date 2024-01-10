@@ -135,7 +135,7 @@ export async function POST(req: Request) {
         return formattedPreviousMessages.join('\n')
       },
       github_url: () => {
-        return 'https://github.com/sublime-security/sublime-rules'
+        return `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_REPO}`
       }
     },
     PROMPT,
