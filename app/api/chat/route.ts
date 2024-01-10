@@ -63,7 +63,6 @@ const saveMessageListener = (
 ) => {
   if (run.outputs) {
     // create payload
-    console.log(run.outputs)
     const createdAt = Date.now()
     const payload = {
       id: message_id,
@@ -120,7 +119,6 @@ export async function POST(req: Request) {
           input.question
         )
 
-        console.log(`relevant docs: ${relevantDocs}`)
         const serialized = formatDocumentsAsString(relevantDocs)
         return serialized
       },

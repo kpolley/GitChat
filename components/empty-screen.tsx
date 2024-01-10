@@ -20,7 +20,6 @@ const exampleMessages = [
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
-  console.log('process.env.GITHUB_REPO', process.env.NEXT_PUBLIC_GITHUB_REPO)
   const githubRepoUrl = `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_REPO}`
   return (
     <div className="mx-auto max-w-2xl px-4">
