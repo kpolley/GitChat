@@ -80,19 +80,42 @@ const saveMessageListener = async (
     }
 
     // save payload to KV
-    const output: string = await kv
-      .hmset(`chat:${message_id}`, payload)
-      .then(() => {
-        kv.zadd(`user:chat:${userId}`, {
-          score: createdAt,
-          member: `chat:${message_id}`
-        }).then(() => {
-          console.log(`Successfully saved chat message ${message_id}`)
-        })
-        console.log(`output: ${output}`)
+    console.log(`Saving chat message ${message_id}`)
+    console.log(`payload: ${JSON.stringify(payload)}`)
 
-        return output
-      })
+    // first, save the individual chat key
+    const chatKey = `chat:${message_id}`
+    const setChatResp = await kv.hmset(chatKey, payload)
+
+    if (setChatResp !== 'OK') {
+      console.log(`Failed to save chat message ${message_id}`)
+      return
+    }
+
+    // next, save the user's chat history
+    const userChatKey = `user:chat:${userId}`
+    const updateUserHistory = await kv.zadd(userChatKey, {
+      score: createdAt,
+      member: chatKey
+    })
+
+    console.log(`updateUserHistory: ${updateUserHistory}`)
+
+    console.log(`Successfully saved chat message ${message_id}`)
+
+    // const output: string = await kv
+    //   .hmset(`chat:${message_id}`, payload)
+    //   .then(() => {
+    //     kv.zadd(`user:chat:${userId}`, {
+    //       score: createdAt,
+    //       member: `chat:${message_id}`
+    //     }).then(() => {
+    //       console.log(`Successfully saved chat message ${message_id}`)
+    //     })
+    //     console.log(`output: ${output}`)
+
+    //     return output
+    //   })
   }
 }
 
