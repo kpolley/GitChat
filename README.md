@@ -29,17 +29,20 @@ It includes
 - Chat sharing
 - Dark/Light mode
 
-## Installation
-
-After cloning the repository, first create a `.env.local` file in the root directory and populate the variable values with your own.
+## Usage
 
 ```bash
-cp .env.example .env.local
-```
-
-run the following commands to install the dependencies and start the server.
-
-```bash
+# Install dependencies
 npm install
+
+# Create and populate the .env.local file with your environment variables
+# (OpenAI key, Github repo, etc.)
+cp .env.example .env.local
+
+# Initialize the vector DB
+# this command will clone the GitHub repo and populate the database with the vector embeddings of the code
+npm run generate
+
+# Run the server. Visit http://localhost:3000 to see the chatbot
 npm run dev
 ```
