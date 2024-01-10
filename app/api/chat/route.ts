@@ -85,41 +85,16 @@ async function saveMessageListener(
 
     // first, save the individual chat key
     const chatKey = `chat:${message_id}`
-    const setChatResp = await kv.hmset(chatKey, payload)
-
-    console.log(`setChatResp: ${setChatResp}`)
-
-    if (setChatResp !== 'OK') {
-      console.log(`Failed to save chat message ${message_id}`)
-      return new Response('Failed to save chat message', {
-        status: 500
-      })
-    }
+    await kv.hmset(chatKey, payload)
 
     // next, save the user's chat history
     const userChatKey = `user:chat:${userId}`
-    const updateUserHistory = await kv.zadd(userChatKey, {
+    await kv.zadd(userChatKey, {
       score: createdAt,
       member: chatKey
     })
 
-    console.log(`updateUserHistory: ${updateUserHistory}`)
-
     console.log(`Successfully saved chat message ${message_id}`)
-
-    // const output: string = await kv
-    //   .hmset(`chat:${message_id}`, payload)
-    //   .then(() => {
-    //     kv.zadd(`user:chat:${userId}`, {
-    //       score: createdAt,
-    //       member: `chat:${message_id}`
-    //     }).then(() => {
-    //       console.log(`Successfully saved chat message ${message_id}`)
-    //     })
-    //     console.log(`output: ${output}`)
-
-    //     return output
-    //   })
   }
 }
 
