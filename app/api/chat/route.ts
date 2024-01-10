@@ -55,12 +55,12 @@ const EMBEDDING_MODEL = new OpenAIEmbeddings({
 
 const VECTOR_STORE = VercelPostgres.initialize(EMBEDDING_MODEL)
 
-const saveMessageListener = async (
+async function saveMessageListener(
   run: Run,
   message_id: string,
   userId: string,
   messages: any[]
-) => {
+) {
   if (run.outputs) {
     // create payload
     const createdAt = Date.now()
@@ -87,9 +87,13 @@ const saveMessageListener = async (
     const chatKey = `chat:${message_id}`
     const setChatResp = await kv.hmset(chatKey, payload)
 
+    console.log(`setChatResp: ${setChatResp}`)
+
     if (setChatResp !== 'OK') {
       console.log(`Failed to save chat message ${message_id}`)
-      return
+      return new Response('Failed to save chat message', {
+        status: 500
+      })
     }
 
     // next, save the user's chat history
@@ -162,8 +166,8 @@ export async function POST(req: Request) {
     PROMPT,
     MODEL
   ]).withListeners({
-    onEnd: (run: Run) => {
-      saveMessageListener(run, message_id, userId, messages)
+    onEnd: async (run: Run) => {
+      await saveMessageListener(run, message_id, userId, messages)
     }
   })
 
