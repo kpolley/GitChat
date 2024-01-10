@@ -4,6 +4,12 @@ GitChat is a chatbot that is able to search and answer questions about a GitHub 
 
 ![hello](public/hello.png)
 
+## Demo
+
+Demo chat: https://gitchat.kpolley.com
+
+Demo share: https://gitchat.kpolley.com/share/FrAT0ak
+
 ## Usecases
 
 You can use this chatbot to answer questions about a repository you are new to, or you can offer GitChat
