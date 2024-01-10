@@ -84,7 +84,8 @@ const saveMessageListener = async (
       kv.zadd(`user:chat:${userId}`, {
         score: createdAt,
         member: `chat:${message_id}`
-      })
+      }).then(() => {
+        console.log(`Successfully saved chat message ${message_id}`)
     })
 
     console.log(`output: ${JSON.stringify(output)}`)
