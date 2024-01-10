@@ -80,15 +80,19 @@ const saveMessageListener = async (
     }
 
     // save payload to KV
-    const output = await kv.hmset(`chat:${message_id}`, payload).then(() => {
-      kv.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${message_id}`
-      }).then(() => {
-        console.log(`Successfully saved chat message ${message_id}`)
+    const output: string = await kv
+      .hmset(`chat:${message_id}`, payload)
+      .then(() => {
+        kv.zadd(`user:chat:${userId}`, {
+          score: createdAt,
+          member: `chat:${message_id}`
+        }).then(() => {
+          console.log(`Successfully saved chat message ${message_id}`)
+        })
+        console.log(`output: ${output}`)
+
+        return output
       })
-      console.log(`output: ${JSON.stringify(output)}`)
-    })
   }
 }
 
