@@ -87,9 +87,8 @@ const saveMessageListener = async (
       }).then(() => {
         console.log(`Successfully saved chat message ${message_id}`)
     })
-
     console.log(`output: ${JSON.stringify(output)}`)
-  }
+  })
 }
 
 export async function POST(req: Request) {
