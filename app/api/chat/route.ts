@@ -20,6 +20,8 @@ import { VercelPostgres } from 'langchain/vectorstores/vercel_postgres'
 
 import { RunnableSequence } from '@langchain/core/runnables'
 
+export const maxDuration = 300
+
 const formatMessage = (message: VercelChatMessage) => {
   return `${message.role}: ${message.content}`
 }
