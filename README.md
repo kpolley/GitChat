@@ -12,7 +12,7 @@ Demo chat: https://gitchat.kpolley.com
 
 Demo share: https://gitchat.kpolley.com/share/FrAT0ak
 
-## Usecases
+## Use cases
 
 You can use this chatbot to answer questions about a repository you are new to, or you can offer GitChat
 as an internal service to an organization so every engineer has a helpful chatbot to answer questions about
